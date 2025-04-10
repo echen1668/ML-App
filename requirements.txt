@@ -1,4 +1,4 @@
-pymongo==4.11.3
+pymongo
 scikit-learn
 seaborn
 skopt 
