@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
 import inspect, re
-#import openpyxl 
-#from openpyxl import 
+import openpyxl 
+from openpyxl import 
 import xlsxwriter
-#from openpyxl.styles import Alignment, PatternFill, Border, Side
+from openpyxl.styles import Alignment, PatternFill, Border, Side
 import csv
 import xlsxwriter
 import magic 
