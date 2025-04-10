@@ -5,8 +5,15 @@ rich
 mdurl
 markdown-it-py
 pymongo==4.11.3
+sklearn
 scikit-learn
 seaborn
 pandas
+numpy
 plotly
 autogluon
+psutil
+matplotlib
+seaborn
+scipy
+joblib
