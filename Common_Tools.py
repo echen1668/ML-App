@@ -16,10 +16,6 @@ import os
 import joblib as joblib
 from joblib import dump, load
 import json
-import tkinter as tk
-from tkinter import *
-import psutil
-from PIL import ImageTk, Image
 import statistics
 from IPython.display import display
 #np.random.seed(1000)
