@@ -94,72 +94,66 @@ def test_model(models, test_data_raw, outcomes, train_data_raw=None, cutoff_inde
         # create a states able for metric on the test set
         #res, res_array = full_roc_curve(y_test.to_numpy(), y_pred.to_numpy())
             
-        try:
-            # get the model
-            model = models[outcome]['Model']
-            print(f'Models Label: {model.label}')
-            
-            outcome_dic[outcome] = {}
-            
-            y_pred = model.predict(test_data.drop(columns=[outcome])) # get the predictions for test set
-            y_proba = model.predict_proba(test_data.drop(columns=[outcome])) # Prediction Probabilities for test set
-            evaluation = model.evaluate(test_data, silent=True)
-            
-            # save ground truths, predictions, and probabilities
-            outcome_dic[outcome]['Ground Truths'] = y_test
-            outcome_dic[outcome]['Predictions'] = y_pred
-            outcome_dic[outcome]['Probability Scores'] = y_proba
-    
-            if train_data_raw is not None:
-                # create a states able for metric on the train set
-                y_pred_train = model.predict(train_data.drop(columns=[outcome]))
-                y_proba_train = model.predict_proba(train_data.drop(columns=[outcome]))
-                res_train, res_array_train = full_roc_curve(y_train.to_numpy(), y_proba_train[1].to_numpy(), index=cutoff_index)
-                evaluation['AUROC Score (Train)'] = res_train['auc']
-                evaluation['AUROC CI Low (Train)'] = res_train['auc_cilow']
-                evaluation['AUROC CI High (Train)'] = res_train['auc_cihigh']
-                evaluation['P (Train)'] = res_train['P']
-                evaluation['N (Train)'] = res_train['N']
-            
-            # create a states able for metric on the test set
-            res, res_array = full_roc_curve(y_test.to_numpy(), y_proba[1].to_numpy(), index=cutoff_index)
-            print("Results Array: ", res)
-            evaluation['TPR'] = res['tpr']
-            evaluation['TNR'] = res['tnr']
-            evaluation['PPV'] = res['ppv']
-            evaluation['NPV'] = res['npv']
-            
-            evaluation['AUROC Score'] = res['auc']
-            evaluation['AUROC CI Low'] = res['auc_cilow']
-            evaluation['AUROC CI High'] = res['auc_cihigh']
-            evaluation['cutoff type'] = cutoff_index
-            evaluation['cutoff'] = res['cutoff_mcc'] if cutoff_index=='mcc' else (res['cutoff_ji'] if cutoff_index=='ji' else (res['cutoff_f1'] if cutoff_index=='f1' else res['cutoff_youden']))
-            
-            print("Cutoff Index: ", evaluation['cutoff'])
-            
-            # Extract TP, FP, TN, FN
-            evaluation['TP'] = res['TP']
-            evaluation['FP'] = res['FP']
-            evaluation['TN'] = res['TN']
-            evaluation['FN'] = res['FN']
-            
-            evaluation['P'] = res['P']
-            evaluation['N'] = res['N']
-            
-            evaluation['precision'] = res['precision']
-            evaluation['recall'] = res['recall']
-            
-            evaluation['Ground Truths'] = y_test
-            evaluation['Predictions'] = y_pred
-            evaluation['Probability Scores'] = y_proba
-            
-            print(evaluation)
-        except Exception as e:
-            print(f"Unable to make prediction for {outcome}.")
-            print(f"An error occurred: {type(e).__name__} - {e}")
-            print(f'Its value count is {y_test.value_counts()}')
-            continue
 
+        # get the model
+        model = models[outcome]['Model']
+        print(f'Models Label: {model.label}')
+            
+        outcome_dic[outcome] = {}
+            
+        y_pred = model.predict(test_data.drop(columns=[outcome])) # get the predictions for test set
+        y_proba = model.predict_proba(test_data.drop(columns=[outcome])) # Prediction Probabilities for test set
+        evaluation = model.evaluate(test_data, silent=True)
+            
+        # save ground truths, predictions, and probabilities
+        outcome_dic[outcome]['Ground Truths'] = y_test
+        outcome_dic[outcome]['Predictions'] = y_pred
+        outcome_dic[outcome]['Probability Scores'] = y_proba
+    
+        if train_data_raw is not None:
+            # create a states able for metric on the train set
+            y_pred_train = model.predict(train_data.drop(columns=[outcome]))
+            y_proba_train = model.predict_proba(train_data.drop(columns=[outcome]))
+            res_train, res_array_train = full_roc_curve(y_train.to_numpy(), y_proba_train[1].to_numpy(), index=cutoff_index)
+            evaluation['AUROC Score (Train)'] = res_train['auc']
+            evaluation['AUROC CI Low (Train)'] = res_train['auc_cilow']
+            evaluation['AUROC CI High (Train)'] = res_train['auc_cihigh']
+            evaluation['P (Train)'] = res_train['P']
+            evaluation['N (Train)'] = res_train['N']
+            
+        # create a states able for metric on the test set
+        res, res_array = full_roc_curve(y_test.to_numpy(), y_proba[1].to_numpy(), index=cutoff_index)
+        print("Results Array: ", res)
+        evaluation['TPR'] = res['tpr']
+        evaluation['TNR'] = res['tnr']
+        evaluation['PPV'] = res['ppv']
+        evaluation['NPV'] = res['npv']
+            
+        evaluation['AUROC Score'] = res['auc']
+        evaluation['AUROC CI Low'] = res['auc_cilow']
+        evaluation['AUROC CI High'] = res['auc_cihigh']
+        evaluation['cutoff type'] = cutoff_index
+        evaluation['cutoff'] = res['cutoff_mcc'] if cutoff_index=='mcc' else (res['cutoff_ji'] if cutoff_index=='ji' else (res['cutoff_f1'] if cutoff_index=='f1' else res['cutoff_youden']))
+            
+        print("Cutoff Index: ", evaluation['cutoff'])
+            
+        # Extract TP, FP, TN, FN
+        evaluation['TP'] = res['TP']
+        evaluation['FP'] = res['FP']
+        evaluation['TN'] = res['TN']
+        evaluation['FN'] = res['FN']
+            
+        evaluation['P'] = res['P']
+        evaluation['N'] = res['N']
+            
+        evaluation['precision'] = res['precision']
+        evaluation['recall'] = res['recall']
+            
+        evaluation['Ground Truths'] = y_test
+        evaluation['Predictions'] = y_pred
+        evaluation['Probability Scores'] = y_proba
+            
+        print(evaluation)
 
         try:
             print("Feature Importance....")
