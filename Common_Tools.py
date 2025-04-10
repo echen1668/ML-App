@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 import inspect, re
 #import openpyxl 
-#from openpyxl import load_workbook
+#from openpyxl import 
 import xlsxwriter
-from openpyxl.styles import Alignment, PatternFill, Border, Side
+#from openpyxl.styles import Alignment, PatternFill, Border, Side
 import csv
 import xlsxwriter
 import magic 
@@ -97,7 +97,7 @@ def wrap_text_excel(file_path):
 
 def expand_cell_excel(file_path):
     # Load the workbook and the sheet
-    wb = load_workbook(file_path)
+    wb = (file_path)
     ws = wb.active
 
     # Adjust the width of the columns based on the max length in each column
@@ -118,7 +118,7 @@ def expand_cell_excel(file_path):
 
 def grid_excel(file_path):
     # Load the workbook and the sheet
-    wb = load_workbook(file_path)
+    wb = (file_path)
     ws = wb.active
     
     # Define border style
@@ -138,7 +138,7 @@ def grid_excel(file_path):
 # Function to fill cells with color if their values are in the target list
 def fill_cells_with_color(file_path, target_values, color):
     # Load the workbook and select the specified sheet
-    workbook = load_workbook(file_path)
+    workbook = (file_path)
     sheet = workbook.active
 
     # Define the fill pattern with the specified color
