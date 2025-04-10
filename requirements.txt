@@ -2,3 +2,4 @@ pymongo==4.11.3
 scikit-learn
 seaborn
 skopt 
+openpyxl
