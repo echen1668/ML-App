@@ -151,8 +151,9 @@ def test_model(models, test_data_raw, input_columns, outcomes, train_data_raw=No
             evaluation['Probability Scores'] = y_proba
             
             print(evaluation)
-        except:
+        except Exception as e:
             print(f"Unable to make prediction for {outcome}.")
+            print(f"An error occurred: {type(e).__name__} - {e}")
             print(f'Its value count is {y_test.value_counts()}')
             continue
         
