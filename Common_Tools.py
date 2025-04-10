@@ -71,7 +71,7 @@ def dict_to_excel(data, file_path=""):
 
 def wrap_text_excel(file_path):
     # Load the workbook and the sheet
-    wb = load_workbook(file_path)
+    wb = (file_path)
     ws = wb.active
 
     # Set text wrapping for all cells and adjust column width based on the longest cell in each column
