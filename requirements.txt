@@ -1,4 +1,5 @@
 openpyxl
+xlsxwriter
 rich
 mdurl
 markdown-it-py
