@@ -1,4 +1,5 @@
-pymongo
+pip==25.0.1
+pymongo==4.11.3
 scikit-learn
 seaborn
 skopt 
