@@ -7,7 +7,6 @@ import xlsxwriter
 from openpyxl.styles import Alignment, PatternFill, Border, Side
 import csv
 import xlsxwriter
-import magic 
 import random 
 from random import randint
 from random import uniform
